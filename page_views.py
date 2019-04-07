@@ -26,10 +26,10 @@ def wikimedia_request(page_name, start_date, end_date = None):
     ----------
     page_name : string
     A string containing the name of the wikipeida page you would like pageviews for
-    
+
     start_date : string
     a date string YYYY/MM/DD indicating the first date that the request should return
-    
+
     end_date : string
     a date string YYYY/MM/DD indicating the last date that the request should return. defaults to system date
     Returns
@@ -37,7 +37,7 @@ def wikimedia_request(page_name, start_date, end_date = None):
     df : pandas DataFrame
     A dataframe with the article name and the number of pageviews.
     '''
-    
+
     # get rid of the / in the date
     sdate = start_date.split("/")
     # join together the text that was split
@@ -79,22 +79,22 @@ def tsregplot(series, ax = None, days_forward = 10, color = 'C0'):
     ----------
     series : Pandas datetime index Series
     A pandas Series with datetime index
-    
+
     ax : matplotlib axes object
     A matplotlib axes obect
-    
+
     days_forward : int
     An integer indicating how many days to extend the regression line
-    
+
     color : string
-    A matplotlib color string 
-    
+    A matplotlib color string
+
     Returns
     -------
     ax : matplotlib axes object
     returns a matplotlib axes object with regplot
     '''
-    
+
     series = series.reset_index()
     series.columns = ['date', 'value']
     if ax == None:
@@ -106,7 +106,7 @@ def tsregplot(series, ax = None, days_forward = 10, color = 'C0'):
         color = color
         )
         ax.set_xlim(series['date_ordinal'].min() - 2, series['date_ordinal'].max() + days_forward)
-        ax.set_ylim(series['value'].min() - 1000, series['value'].max() + 1000)
+        ax.set_ylim(series['value'].min() *0.9, series['value'].max() * 1.1)
         ax.set_xlabel('date')
         new_labels = [date.fromordinal(int(item)) for item in ax.get_xticks()]
         ax.set_xticklabels(new_labels)
@@ -116,18 +116,18 @@ def tsregplot(series, ax = None, days_forward = 10, color = 'C0'):
         data=series,
         x='date_ordinal',
         y='value',
-        ax = ax, 
+        ax = ax,
         color = color
         )
-    
+
         ax.set_xlim(series['date_ordinal'].min() - 5, series['date_ordinal'].max() + days_forward)
         ax.set_ylim(series['value'].min() * 0.9 , series['value'].max()* 1.1)
         ax.set_xlabel('date')
         new_labels = [date.fromordinal(int(item)).strftime("%m/%Y") for item in ax.get_xticks()]
         ax.set_xticklabels(new_labels)
         return ax
-names = ['Python (programming language)', 'R (programming language)', 'Java (programming language)', 
-         'Scala (programming_language)', 'JavaScript', 'Swift (programming language)', 'C++', 
+names = ['Python (programming language)', 'R (programming language)', 'Java (programming language)',
+         'Scala (programming_language)', 'JavaScript', 'Swift (programming language)', 'C++',
          'C (programming language)', 'Clojure', 'C Sharp (programming language)', 'F Sharp (programming language)',
         'Julia (programming language)', 'Visual Basic .NET', 'Perl', 'Haskell (programming language)',
         'Go (programming language)', 'Ruby (programming language)', 'PHP', 'Bash (Unix shell)', 'TypeScript']
